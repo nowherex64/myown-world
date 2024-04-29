@@ -24,12 +24,18 @@ window.setup = (scene) => {
     const directionalLight = new THREE.DirectionalLight(0xffffff, 5);
     directionalLight.castShadow = true;
     directionalLight.position.set(2, 3, 1);
+    directionalLight.shadow.camera.left = -10; // Límite izquierdo del frustum de la cámara de sombras
+    directionalLight.shadow.camera.right = 10; // Límite derecho del frustum de la cámara de sombras
+    directionalLight.shadow.camera.top = 10; // Límite superior del frustum de la cámara de sombras
+    directionalLight.shadow.camera.bottom = -10; // Límite inferior del frustum de la cámara de sombras
+    directionalLight.shadow.camera.near = 0.5; // Distancia cercana del frustum de la cámara de sombras
+    directionalLight.shadow.camera.far = 200; // Distancia lejana del frustum de la cámara de sombras
 
     const material = new THREE.MeshToonMaterial({
         color: 0xa13f4a,
     });
     const plano = new THREE.Mesh(
-        new THREE.PlaneGeometry(10, 10),
+        new THREE.PlaneGeometry(20, 20),
         material,
     );
 
