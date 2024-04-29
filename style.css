@@ -4,9 +4,33 @@ body {
   padding: 0;
 }
 
+html {
+  background-color: #050545;
+}
+
+body > * {
+  z-index: 5;
+}
+
 canvas.webgl {
   left: 0;
   outline: none;
   position: fixed;
   top: 0;
+  z-index: 1;
+}
+
+main {
+  position: relative;
+  color: white;
+}
+
+main section {
+  box-sizing: border-box;
+  padding: 3em;
+  height: 100vh;
+}
+
+main section h2 {
+  font-size: 3em;
 }
