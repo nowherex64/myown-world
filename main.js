@@ -102,6 +102,15 @@ window.setup = (scene) => {
 window.draw = (elapsedTime) => {
     world.step(1 / 60, elapsedTime.delta, 3);
 
+    if (esferaFisica.position.y < -10) {
+        esferaFisica.velocity.set(0,0,0);
+        esferaFisica.angularVelocity.set(0,0,0);
+
+        esferaFisica.position.x = 0;
+        esferaFisica.position.y = 10;
+        esferaFisica.position.z = 0;
+    }
+
     esfera.position.x = esferaFisica.position.x;
     esfera.position.y = esferaFisica.position.y;
     esfera.position.z = esferaFisica.position.z;
