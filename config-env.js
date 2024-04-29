@@ -1,6 +1,8 @@
 import * as THREE from 'three';
 import { OrbitControls } from 'three/addons/controls/OrbitControls.js';
 
+let oldElapsedTime = 0;
+
 document.addEventListener('DOMContentLoaded', () => {
     // Se prepara el canvas
     const canvas = document.createElement('canvas');
@@ -62,7 +64,11 @@ document.addEventListener('DOMContentLoaded', () => {
     // Se configura el loop de renderizado
     const render = () => {
         if (window.draw) {
-            window.draw(clock.getElapsedTime(), camera, cameraGroup);
+            const elapsedTime = clock.getElapsedTime();
+            const deltaTime = elapsedTime - oldElapsedTime;
+            oldElapsedTime = elapsedTime;
+
+            window.draw({ time: elapsedTime, delta: deltaTime }, camera, cameraGroup);
         }
 
         controls.update();
