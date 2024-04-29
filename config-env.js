@@ -58,7 +58,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // Se agrega la función de configuración
     if (window.setup) {
-        window.setup(scene);
+        window.setup(scene, camera);
     }
 
     // Se configura el loop de renderizado
