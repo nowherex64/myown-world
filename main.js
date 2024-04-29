@@ -3,6 +3,7 @@ import CANNON from 'cannon';
 import * as dat from 'lil-gui';
 
 let esfera;
+let esferaFisica;
 let world;
 
 window.setup = (scene) => {
@@ -39,15 +40,29 @@ window.setup = (scene) => {
 
     world = new CANNON.World();
     world.gravity.set(0, -9.8, 0);
-    const esferaShape = CANNON.Sphere(1);
+    
+    const eShape = new CANNON.Sphere(1);
+    esferaFisica = new CANNON.Body({
+        mass: 1,
+        position: CANNON.Vec3(0, 3, 0),
+        shape: eShape,
+    });
+
+    world.addBody(esferaFisica);
+    /*
     const esferaBody = CANNON.Body({
         mass: 1,
         position: CANNON.Vec3(0, 3, 0),
         shape: esferaShape,
     });
     world.addBody(esferaBody);
+    */
 };
 
 window.draw = (elapsedTime) => {
     world.step(1 / 60, elapsedTime.delta, 3);
+
+    esfera.position.x = esferaFisica.position.x;
+    esfera.position.y = esferaFisica.position.y;
+    esfera.position.z = esferaFisica.position.z;
 };
