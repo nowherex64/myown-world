@@ -3,6 +3,7 @@ import CANNON from 'cannon';
 import * as dat from 'lil-gui';
 
 let esfera;
+let world;
 
 window.setup = (scene) => {
 
@@ -26,7 +27,7 @@ window.setup = (scene) => {
         new THREE.MeshStandardMaterial({color: 0xa13f4a,})
     );
 
-    esfera.position.y = 1;
+    esfera.position.y = 3;
     esfera.castShadow = true;
     plano.castShadow = true;
     plano.receiveShadow = true;
@@ -35,8 +36,18 @@ window.setup = (scene) => {
     scene.add(directionalLight);
     scene.add(esfera);
     scene.add(plano);
+
+    world = new CANNON.World();
+    world.gravity.set(0, -9.8, 0);
+    const esferaShape = CANNON.Sphere(1);
+    const esferaBody = CANNON.Body({
+        mass: 1,
+        position: CANNON.Vec3(0, 3, 0),
+        shape: esferaShape,
+    });
+    world.addBody(esferaBody);
 };
 
 window.draw = (elapsedTime) => {
-
+    world.step(1 / 60, elapsedTime.delta, 3);
 };
