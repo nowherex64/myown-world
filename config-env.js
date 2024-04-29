@@ -29,6 +29,7 @@ document.addEventListener('DOMContentLoaded', () => {
     renderer.setClearColor(0x000000, 1);
     renderer.setSize(window.innerWidth, window.innerHeight);
     renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+    renderer.shadowMap.enabled = true;
     renderer.render(scene, camera);
 
     // Se configura la cámara
