@@ -45,7 +45,8 @@ window.setup = (scene) => {
         new THREE.MeshToonMaterial({
             color: 0x3f4aa1,
         })
-    )
+    );
+
     personaje.mesh.position.x = 3;
     personaje.mesh.position.y = 0.5;
 
@@ -80,6 +81,11 @@ window.setup = (scene) => {
         mass: 1,
         position: new CANNON.Vec3(3, 0.5, 0),
         shape: new CANNON.Box(new CANNON.Vec3(0.5, 0.5, 0.5))
+    });
+    personaje.fisica.addEventListener('collide', (event) => {
+        if (event.body == esferaFisica) {
+            console.log('Choca contra la esfera');
+        }
     });
 
     world.addBody(esferaFisica);
